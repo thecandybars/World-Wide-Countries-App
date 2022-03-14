@@ -1,0 +1,133 @@
+.countryTools {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 10px 35px;
+  height:80px;
+}
+.settings {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 15%;
+  padding: 0px;
+  border: 1px solid #006baa;
+  border-radius: 10px;
+  height:100%;
+}
+
+#reload {
+  display: flex;
+  flex-direction: column;
+  /* justify-content: center; */
+  align-items: center;
+  /* padding : 0, 10em; */
+  /* background-color: tomato; */
+  /* background-color: transparent; */
+  width: 90px;
+  height:100%;
+  cursor: pointer;
+  /* border-left: 2px solid #006baa;
+  border-right: 2px solid #006baa; */
+}
+#reload img {
+  width: 45px;
+  transition-duration: 300ms;
+  transition-timing-function: ease-in-out;
+}
+#reload img:hover{
+  transform: rotate(360deg);
+}
+#results {
+  width: 200px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  background-color: transparent;
+  /* border-right: 2px solid #006baa; */
+}
+  #results span {
+    background-color: #006baa;
+    padding: 3px;
+  }
+.tools {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  width: 35%;
+  border: 1px solid #006baa;
+  border-radius: 10px;
+  padding: 0px;
+  height:100%;
+}
+.tool {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  padding: 10px 0px;
+  margin: 0px 20px;
+}
+.tool label {
+  text-align: center;
+  margin-bottom: 5px;
+}
+#sort img {
+  width: 25px;
+  cursor: pointer;
+  padding: 4px;
+}
+  /* CSS filter generator to convert from black to target hex color : https://codepen.io/sosuke/pen/Pjoqqp */
+  #sort img:hover{
+    filter: brightness(0) saturate(100%) invert(22%) sepia(90%) saturate(2081%) hue-rotate(184deg) brightness(97%) contrast(101%);
+  }
+  #sort .imgSelected{
+    filter: brightness(0) saturate(100%) invert(22%) sepia(90%) saturate(2081%) hue-rotate(184deg) brightness(97%) contrast(101%);
+    border: 1px solid #006caa88;
+    border-radius: 5px;
+  }
+
+.button {
+  position: relative;
+  display: inline-block;
+  margin: 5px;
+  padding: 2px 6px;
+  text-align: center;
+  font-size: 14px;
+  letter-spacing: 1px;
+  text-decoration: none;
+  color: #006baa;
+  background: transparent;
+  cursor: pointer;
+  transition: ease-out 0.5s;
+  border-radius: 10px;
+  border: 2px solid #006baa;
+}
+
+#countries {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+#container {
+  width: 100%;
+}
+
+/* LOADING */
+.loader {
+  margin: auto;
+  border: 20px solid #75bbf9;
+  border-radius: 50%;
+  border-top: 20px solid #006baa;
+  width: 50px;
+  height: 50px;
+  animation: spinner 4s ease-in-out infinite;
+}
+@keyframes spinner {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

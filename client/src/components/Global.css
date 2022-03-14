@@ -1,0 +1,26 @@
+body {
+  /* background-color: #001B39; */
+  background-color: #11111f;
+  color: aliceblue;
+  font-family: 'Roboto', sans-serif;
+}
+
+a {
+  text-decoration: none;
+}
+
+input[type=text] {
+  border-radius: 7px;
+  color: white;
+  font-size: 0.9em;
+  border: 2px solid #006baa;
+  background: transparent;
+}
+
+select {
+    border-radius: 7px;
+    color: white;
+    font-size: 0.9em;
+    border: 2px solid #006baa;
+    background: transparent;
+}

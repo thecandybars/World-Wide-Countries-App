@@ -1,0 +1,54 @@
+.list {
+  display: flex;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+.list button {
+  display: inline-block;
+  padding: 0.35rem 0.65rem;
+  margin: 0.2rem;
+  background-color: transparent;
+  border: 2px solid #006baa;
+  border-radius: 1rem;
+  cursor: pointer;
+  color: #01a1fe;
+  font-size: 1rem;
+  text-align: center;
+  transition: ease-out 0.2s;
+  letter-spacing: 0.05rem;
+  text-decoration: none;
+  text-shadow: 1px 1px 2px #01a1fe75;
+  position: relative;
+  overflow: hidden;
+}
+.list button:hover {
+  background-color: #006caa7a;
+  color: white;
+}
+
+#line {
+	color: #006baa;
+	font-weight: 900;
+}
+
+#current {
+  color: white;
+  background-color: #006baa;
+  padding: 0.25rem 0.65rem;
+  border-radius: 2rem;
+  font-size: 1.4rem;
+  bottom: 3px;
+}
+.hide {
+  visibility: hidden;
+}
+.show {
+  visibility: visible;
+}
+#first {
+  border-radius: 5rem 0 0 5rem;
+}
+#last {
+  border-radius: 0 5rem 5rem 0;
+}

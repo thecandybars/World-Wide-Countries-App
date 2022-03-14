@@ -1,0 +1,49 @@
+/* PAISES EN TILES */
+#card {
+  /* background-color: #006baa; */
+  border: 2px solid #006baa;
+  border-radius: 8px;
+  margin: 5px;
+  /* padding: 3px; */
+  width: 220px;
+  min-height: 180px;
+  text-align: center;
+  overflow: hidden;
+}
+#name {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #cccccc;
+  text-decoration: none;
+  font-weight:bold;
+  background-color: #111111;
+  text-align: center;
+  text-orientation: sideways;
+  font-size: 1.1em;
+  height:2.3em;
+}
+#name:hover {
+  text-decoration: double;
+}
+#flag {
+  height: 80px;
+  transition: height 0.3s;
+  transition-timing-function: ease;
+  /* box-shadow: 2px 2px 4px #014267; */
+  border: 1px solid #444444;
+  border-radius: 5px;
+  margin: 10px;
+  overflow: hidden;
+}
+#flag:hover {
+  height: 85px;
+}
+/* #flag:active {
+  height: 80px;
+} */
+
+#region {
+  font-size: 0.9em;
+  color: white;
+}
