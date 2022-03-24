@@ -13,7 +13,7 @@ World Wide Countries is an individual project, coded during the Labs phase at th
 ## Installation
 
 ### 1. Database
-Create database `Countires`in PostreSQL.
+Create database `Countires` in PostreSQL.
 ### 2. API
 Obtain an API key : https://restcountries.com/
 ### 3. Clone or fork repository
