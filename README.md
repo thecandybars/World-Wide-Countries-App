@@ -1,3 +1,5 @@
+<img  style="border-radius: 5px;" src="./WWC demo.jpg"/>
+
 # World Wide Countries
 
 World Wide Countries is an individual project, coded during the Labs phase at the Henry Bootcamp. It's a SPA (single page app) that fills its database from an API to show and edit information about countries.
