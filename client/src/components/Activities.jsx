@@ -1,6 +1,8 @@
 import React, { useEffect, useState, useRef } from 'react';
 import axios from 'axios';
+import { useSelector } from 'react-redux';
 import { difficultyLevels, durationLevels } from './ActivitiesLevels'
+import { getActivitiesList } from "../actions";
 import SelectCountries from './SelectCountries';
 import nameIco from '../icons/text_fields_white_24dp.svg'
 import difficultyIco from '../icons/equalizer_white_24dp.svg'
@@ -8,10 +10,12 @@ import durationIco from '../icons/timelapse_white_24dp.svg'
 import seasonIco from '../icons/date_range_white_24dp.svg'
 import countryIco from '../icons/flag_white_24dp.svg'
 import styles from './Activities.module.css';
-import Nav from './Nav';
 
 export default function Activities() {
     const responseText = useRef();
+
+    /////// INITIALIZATION
+    const activitiesList = useSelector((state) => state.activitiesList, () => { });
 
     // FORM VALIDATION
     function validate(input) {
@@ -23,6 +27,8 @@ export default function Activities() {
             errors.name = 'No special characters allowed'
         } else if (!(/^[a-zA-ZÑñ].*/.test(input.name))) {
             errors.name = 'Names cant begin with a number'
+        } else if (activitiesList.find(act => act.toUpperCase() === input.name.toUpperCase())) {
+            errors.name = `Activity ${input.name} already exists`
         }
 
         if (!input.season) { errors.season = 'All fields are required'; }
@@ -32,9 +38,7 @@ export default function Activities() {
 
     // FORM DATA
     const [errors, setErrors] = useState({
-        // edited : se usa solo para comprobar si la forma ya fue editada y enable el Submit.
-        //          Debe haber una manera mas elegante de hacerlo. Ver setErrors({...errors, edited:''});
-        edited: 'no',
+        edited: 'no yet',   // errors arranca con datos para forzar el disable del boton Submit.
     });
     const [input, setInput] = useState({
         name: '',
@@ -44,22 +48,35 @@ export default function Activities() {
         countries: [],
     });
     function handleInputChange(e) {
-        setErrors({ ...errors, edited: '' });
+        setErrors({ ...errors });
         const currentInputs = { ...input, [e.target.name]: e.target.value };
+        // FORM FORMAT
+        currentInputs.name = currentInputs.name ? currentInputs.name[0].toUpperCase() + currentInputs.name.slice(1) : '';
+
         setInput(currentInputs);
         setErrors(validate(currentInputs));
     }
+    console.log("🚀 ~ file: Activities.jsx ~ line 64 ~ handleSubmit ~ Object.keys(input)", Object.values(input))
+    console.log("🚀 ~ file: Activities.jsx ~ line 65 ~ handleSubmit ~ Object.keys(input).length", Object.values(input).length)
 
     // DATA SUBMIT
     async function handleSubmit(e) {
         e.preventDefault();
-        const response = await axios.post('http://localhost:3001/activities', input);
-        responseText.current.innerHTML = (response.status === 200)
-            ? " Activity *" + input.name + "* has been added"
-            : response.status + " " + response.statusText;
-        setTimeout(() => {
-            window.location.reload();
-        }, 1500);
+        if (!Object.values(input).filter((el) => (el === '' || el.length===0)).length) {
+            const response = await axios.post('http://localhost:3001/activities', input);
+            const totCountries = input.countries.length;
+            const respCountries = totCountries
+                ? totCountries > 1
+                    ? ' to <span>' + totCountries + ' countries</span>'
+                    : ' to <span>1 country</span>'
+                : '';
+            responseText.current.innerHTML = (response.status === 200)
+                ? "** Activity <span>" + input.name + "</span> has been added" + respCountries + " **"
+                : response.status + " " + response.statusText;
+            setTimeout(() => {
+                window.location.reload();
+            }, 2000);
+        }
     }
 
     // SELECT COUNTRIES ACTIVITY
@@ -68,12 +85,12 @@ export default function Activities() {
         setCountriesPerActivity(countries.filter(c => c.selected === true));
     };
     useEffect(() => {
-        setInput({ ...input, countries: countriesPerActivity.map(c => c.id) })
+        // setInput({ ...input, countries: countriesPerActivity.map(c => c.id) })
+        setInput(input => ({ ...input, countries: countriesPerActivity.map(c => c.id) }))
     }, [countriesPerActivity])
 
     return (
         <div>
-            <Nav />
             <form onSubmit={handleSubmit} id={styles.gridContainer}>
 
                 <span className={styles.name}>
@@ -81,7 +98,7 @@ export default function Activities() {
                     <label>Name</label>
                 </span>
                 <input type="text" name="name" value={input.name}
-                    onChange={handleInputChange} />
+                    onChange={handleInputChange} placeholder='Give a name to this activity...' />
                 <span className={styles.danger}>{errors.name}</span>
 
                 <span className={styles.name}>
@@ -136,7 +153,7 @@ export default function Activities() {
                 <div>
                     <input type="submit" value="Add activity"
                         className={styles.button}
-                        id={!Object.keys(errors).length && styles.buttonHover}  // Remove hover if disabled 
+                        id={!Object.keys(errors).length ? styles.buttonHover : ''}  // Remove hover if disabled 
                         disabled={Object.keys(errors).length}
                     />
                 </div>

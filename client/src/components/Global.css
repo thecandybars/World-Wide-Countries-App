@@ -8,6 +8,9 @@ body {
 a {
   text-decoration: none;
 }
+a:visited {
+  color:white;
+}
 
 input[type=text] {
   border-radius: 7px;

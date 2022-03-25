@@ -4,7 +4,6 @@ import { useParams } from "react-router-dom";
 import { getCountryDetails } from "../actions";
 import ActivityCard from "./ActivityCard";
 import style from './CountryDetails.module.css';
-import Nav from "./Nav";
 
 export default function CountryDetails() {
     const dispatch = useDispatch();
@@ -15,13 +14,13 @@ export default function CountryDetails() {
     // Inicialización
     useEffect(() => {
         dispatch(getCountryDetails(id));
-    }, [])
+    }, [dispatch, id])
 
     return (
         <div>
-            <Nav />
             {
-                countryDetails.length !== 0 ?
+                countryDetails.length !== 0
+                    ?
                     (<div id={style.detail}>
                         <div id={style.name}>{countryDetails.name}</div>
                         <div id={style.id}>({countryDetails.id})</div>
@@ -58,6 +57,7 @@ export default function CountryDetails() {
                                 countryDetails.activities &&
                                 countryDetails.activities.map(act => (
                                     <ActivityCard
+                                        key={act.id}
                                         name={act.name}
                                         difficulty={act.difficulty}
                                         duration={act.duration}
@@ -66,8 +66,8 @@ export default function CountryDetails() {
                                 ))
                             }
                         </div>
-                    </div>
-                    ) : <div className={style.loader}></div>
+                    </div>)
+                    : <div className={style.loader}></div>
             }
         </div>
     )

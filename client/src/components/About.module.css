@@ -1,8 +1,7 @@
-
 .about {
   border: 3px #002f5d solid;
   border-radius: 20px;
-  margin: 50px auto;
+  margin: 20px auto;
   width: 50%;
   padding: 20px;
   text-align: center;
@@ -10,31 +9,50 @@
 
 .title {
   font-size: 3.5em;
+  font-family: "Roboto Slab", serif;
+}
+.subtitle {
+  font-size: 1.5em;
+  border-bottom: 1px solid #006baa;
+  margin-bottom: 1.2em;
+  padding-bottom: 1em;
+}
+.subtitle a {
+  color: #006baa;
+  margin-right: 0.1em;
 }
 .coded {
-    font-size: 2em;
-    margin:10px;
+  font-size: 2em;
+  margin: 10px;
 }
 .coded span {
   color: #006baa;
 }
 .techno {
   font-size: 1.7em;
-  margin:10px;
+  margin: 10px;
 }
 .techno span {
-    color: #006baa;
-  }
+  color: #006baa;
+}
 .img {
-    margin:30px;
+  margin-top: 30px;
+}
+.cartoons {
+  font-size: 0.9em;
+}
+.cartoons a {
+  color: #006baa;
+  margin-left: 0.5em;
 }
 .button {
   position: relative;
   display: inline-block;
   margin: 5px;
-  padding: 7px 15px;
+  margin-top: 25px;
+  padding: 18px 25px;
   text-align: center;
-  font-size: 18px;
+  font-size: 1.7em;
   letter-spacing: 1px;
   text-decoration: none;
   color: #006baa;
@@ -43,12 +61,7 @@
   transition: ease-out 0.5s;
   border: 2px solid #006baa;
   border-radius: 10px;
-  /* box-shadow: inset 0 0 0 0 #006baa; */
 }
 .button:hover {
   color: white;
-  /* box-shadow: inset 0 -100px 0 0 #006caa44; */
-}
-.button:active {
-  /* transform: scale(0.9); */
 }

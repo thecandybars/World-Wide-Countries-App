@@ -23,7 +23,7 @@
   height: auto;
   display: grid;
   grid-template-columns: 15% 85%;
-  /* background-color: tomato; */
+  column-gap: 8px;
 }
 .grid span {
   text-align: left;

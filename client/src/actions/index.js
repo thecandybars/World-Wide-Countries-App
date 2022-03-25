@@ -1,7 +1,6 @@
 import axios from 'axios';
 
 export function getCountries() {
-    // Estudiar este uso de dispatch!!!
     return async function (dispatch) {
         const countries = await axios.get('http://localhost:3001/countries');
         return dispatch({

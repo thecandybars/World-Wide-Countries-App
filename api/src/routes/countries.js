@@ -1,3 +1,8 @@
+/*  
+    ROUTES FOR :
+    /countries    
+*/
+
 const router = require('express').Router();
 const { getCountriesAPI, getCountriesBD } = require('../services/index.js');
 
@@ -7,7 +12,7 @@ router.get('/', async (req, res) => {
     const { name } = req.query;
     if (!name) {
         // '/' : Extrae data de la API y la importa a la BD
-        const response =  await getCountriesAPI();
+        const response = await getCountriesAPI();
         res.json(response);
     } else {
         // '/?name' : Busca por NAME el la BD
@@ -17,7 +22,6 @@ router.get('/', async (req, res) => {
         else res.status(404).send('No se encontró un país de nombre ' + search.name);
     }
 })
-//router.get('/?name')// Probar ruta /countries/?name
 
 router.get('/:idPais', async (req, res) => {
     // Busca por id en la BD
@@ -25,6 +29,13 @@ router.get('/:idPais', async (req, res) => {
     const response = await getCountriesBD(search);
     if (response) res.json(response);
     else res.status(404).send('No se encontró un país con código ' + search.idPais);
+})
+
+router.get('/regions', async (req, res) => {
+    const response = await getRegions();
+    if (response) res.json(response);
+    else res.status(404).send('No hay regiones para mostrar ' + search.idPais);
+
 })
 
 module.exports = router;

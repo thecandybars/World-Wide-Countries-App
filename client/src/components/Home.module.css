@@ -4,6 +4,8 @@
   align-items: center;
   margin: 10px 35px;
   height:80px;
+  padding-top: 1em;
+
 }
 .settings {
   display: flex;
@@ -19,24 +21,21 @@
 #reload {
   display: flex;
   flex-direction: column;
-  /* justify-content: center; */
   align-items: center;
-  /* padding : 0, 10em; */
-  /* background-color: tomato; */
-  /* background-color: transparent; */
   width: 90px;
   height:100%;
   cursor: pointer;
-  /* border-left: 2px solid #006baa;
-  border-right: 2px solid #006baa; */
 }
 #reload img {
   width: 45px;
-  transition-duration: 300ms;
+  transition-duration: 200ms;
   transition-timing-function: ease-in-out;
 }
 #reload img:hover{
-  transform: rotate(360deg);
+  transform: rotate(225deg);
+}
+#reload img:active{
+  transform: rotate(225deg) scale(0.85);
 }
 #results {
   width: 200px;
@@ -44,7 +43,6 @@
   align-items: center;
   flex-direction: column;
   background-color: transparent;
-  /* border-right: 2px solid #006baa; */
 }
   #results span {
     background-color: #006baa;
@@ -54,7 +52,7 @@
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
-  width: 35%;
+  /* width: 35%; */
   border: 1px solid #006baa;
   border-radius: 10px;
   padding: 0px;
@@ -82,8 +80,11 @@
   }
   #sort .imgSelected{
     filter: brightness(0) saturate(100%) invert(22%) sepia(90%) saturate(2081%) hue-rotate(184deg) brightness(97%) contrast(101%);
-    border: 1px solid #006caa88;
-    border-radius: 5px;
+    border-bottom: 3px solid #006caa88;
+  }
+
+  .tool #filter select {
+    margin-left: 5px;
   }
 
 .button {
@@ -107,6 +108,7 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  padding-top: 1em;
 }
 
 #container {

@@ -1,3 +1,8 @@
+/*  
+    ROUTES FOR :
+    /activities    
+*/
+
 const router = require('express').Router();
 const { postActivity, getActivities } = require('../services/index.js');
 

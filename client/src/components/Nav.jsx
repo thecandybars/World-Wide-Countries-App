@@ -1,28 +1,30 @@
 import React from 'react'
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import styles from './Nav.module.css';
 
 
 export default function Nav() {
     return (
         <nav className={styles.container}>
-            
+            <NavLink to="/home">
+                <div className={styles.logo}>World Wide Countries</div>
+            </NavLink>
             <div className={styles.links}>
-                <Link to="/">
+                <NavLink to="/" >
                     <input type="button" value="Landing" className={styles.button} />
-                </Link>
+                </NavLink>
 
-                <Link to="/home">
+                <NavLink to="/home" className={({ isActive }) => isActive ? styles.activo : ''}>
                     <input type="button" value="Browse" className={styles.button} />
-                </Link>
+                </NavLink>
 
-                <Link to="/activities">
+                <NavLink to="/activities" className={({ isActive }) => isActive ? styles.activo : ''}>
                     <input type="button" value="Activities" className={styles.button} />
-                </Link>
+                </NavLink>
 
-                <Link to="/about">
+                <NavLink to="/about"  className={({ isActive }) => isActive ? styles.activo : ''}>
                     <input type="button" value="About" className={styles.button} />
-                </Link>
+                </NavLink>
             </div>
         </nav>
     )

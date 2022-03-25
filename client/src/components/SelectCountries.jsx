@@ -21,13 +21,15 @@ export default function SelectCountries({ countriesActivity }) {
     useEffect(() => {
         dispatch(getCountries());
         dispatch(getActivitiesList());
-    }, [])
+    }, [dispatch])
     /* INIT AFTER LOADING : FILL SELECTED COUNTRIES */
     useEffect(() => {
         //// FILL REGION LIST
         setRegionList(countries
             .map((obj) => obj.region) // convierte el obj en arr
             .filter((item, index, arr) => arr.indexOf(item) === index)); // filtra repeticiones);
+            // .map(reg => ({ region: reg, hasCountrySelected: false }));  // ver comment linea 13
+
         //// FILL SELECTED COUNTRIES
         const arr = countries.map((c) => (
             {
@@ -77,7 +79,7 @@ export default function SelectCountries({ countriesActivity }) {
     return (
         <div className={styles.container}>
             <div className={styles.search}>
-                <img src={searchIco} />
+                <img src={searchIco} alt='search'/>
                 <label>Search </label>
                 <input type="text" id="searchText" name="searchText" onChange={handleSearchText} ref={inputSearch} />
                 <input className={styles.button} type="button" onClick={handleResetButton} value="X" />
@@ -90,9 +92,9 @@ export default function SelectCountries({ countriesActivity }) {
                 {
                     selectedCountries &&
                     regionList.map(region =>
-                        <div id={styles.region}>
+                        <div key={region} id={styles.region}>
                             <h2>{region}</h2>
-                            <div key={region} id={styles.countries}>
+                            <div id={styles.countries}>
                                 {selectedCountries.map(c =>
                                     (c.region === region
                                         && (searchText

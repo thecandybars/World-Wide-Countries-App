@@ -1,5 +1,4 @@
 #gridContainer {
-  /* background-color: tomato; */
   margin-top: 50px;
   display: grid;
   grid-template-columns: 45% 10% 45%;
@@ -13,13 +12,14 @@
   font-size: 1.1em;
   margin: 8px auto;
   height: auto;
-  /* display: grid; */
 }
 .name {
   display: flex;
-  /* text-align: right; */
-  justify-content: end;
+  justify-content: flex-end;
   align-items: center;
+}
+::placeholder {
+  color:#006caa9a;
 }
 .name img {
   vertical-align: text-bottom;
@@ -31,8 +31,6 @@
 }
 
 .country {
-  /* width: 5em; */
-  /* margin: 2px; */
   text-align: center;
 }
 
@@ -41,7 +39,6 @@ span.danger {
   font-size: 0.9em;
   margin-top: 4px;
 }
-
 input.danger {
   border: 2px solid red;
 }
@@ -61,6 +58,9 @@ input.danger {
   border-radius: 10px;;
   font-size: 1.5em;
   height: 1.5em;
+}
+.afterSubmit span {
+  color: #006baa;
 }
 
 /* BUTTON */

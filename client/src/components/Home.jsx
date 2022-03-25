@@ -3,8 +3,6 @@ import React from "react";
 import { useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getCountries, getActivitiesList, countriesTools } from "../actions";
-import { Link } from "react-router-dom";
-import Nav from "./Nav";
 import CountryCard from "./CountryCard.jsx";
 import Paging from "./Paging";
 import style from "./Home.module.css";
@@ -22,8 +20,9 @@ export default function Home() {
   const dispatch = useDispatch();
   // LOCAL STATES
   const [filter, setFilter] = useState({ region: "", activity: "" });
-  const [order, setOrder] = useState('');
+  const [order, setOrder] = useState('asc');
   const [searchText, setSearchText] = useState('');
+
   const [allCountries, setAllCountries] = useState([]);
   const [regionList, setRegionList] = useState([]);
   // GLOBAL STATE
@@ -36,31 +35,41 @@ export default function Home() {
 
   /////// INITIALIZATION
   useEffect(() => {
+    setAllCountries([]);
     dispatch(getCountries());
     dispatch(getActivitiesList());
-  }, [])
+  }, []) // un warning me obliga a poner dispatch acá. Porqué? Sobre todo no entiendo porqué funciona!
+  
   // Cuando countries esta cargado:
   useEffect(() => {
     if (allCountries.length === 0) {
-      console.log("holaaaaa");
       setAllCountries([...countries]);
       setRegionList(countries
         .map((obj) => obj.region) // convierte el obj en arr
         .filter((item, index, arr) => arr.indexOf(item) === index)); // filtra repeticiones);
-      pages(1); // Go to page 1
+        pages(1); // Go to page 1
+      setOrder('asc');
     }
   }, [countries])
+
+  // useEffect(() => {
+  //   setRegionList(countries
+  //     .map((obj) => obj.region) // convierte el obj en arr
+  //     .filter((item, index, arr) => arr.indexOf(item) === index)); // filtra repeticiones);
+  // }, [])
+
   // Re-inicialización forzada con botón
   function handleReloadDB(e) {
     e.preventDefault();
     setAllCountries([]);
     dispatch(getCountries());
     dispatch(getActivitiesList());
+    resetFilters()
   }
 
   ///// PAGING
   const [currentPage, setCurrentPage] = useState(1);
-  const [countriesXPage, setCountriesXPage] = useState(19);
+  const [countriesXPage, setCountriesXPage] = useState(30);
   const [totalPages, setTotalPages] = useState(0);
   const lastCountry = currentPage * countriesXPage;
   const firstCountry = lastCountry - countriesXPage;
@@ -68,24 +77,27 @@ export default function Home() {
 
   const pages = (page) => {
     //////// Solo usar para ese requisito extraño del PI !!!
-    // if (page === 1) setCountriesXPage(9);  
+    // if (page === 1) setCountriesXPage(9);
     // else setCountriesXPage(10);
     setCurrentPage(page);
   };
   useEffect(() => {
     if (countries) {
-      console.log("🚀 ~ file: Home.jsx ~ line 77 ~ useEffect ~ countries", countries)
       const calcTotalPages = Math.ceil(countries.length / countriesXPage)
       setTotalPages(calcTotalPages);
       if (currentPage > calcTotalPages) setCurrentPage(1);
     }
-  }, [countries, countriesXPage]);
+  }, [countries, countriesXPage, currentPage]);//
 
   /////////////// COUNTRIES TOOLS : FILTER, SEARCH && ORDER : se podria modularizar !!!!!!
   useEffect(() => {
     dispatch(countriesTools(filter, searchText, order, allCountries));
     pages(currentPage);
-  }, [order, filter, searchText]);
+  }, [order, filter, searchText, dispatch, currentPage]);// Si agrego allCountries entra en loop
+
+  function resetFilters() {
+    setFilter({ region: "", activity: "" });
+  }
 
   // FILTER
   const regionFilter = useRef();
@@ -118,16 +130,12 @@ export default function Home() {
 
   return (
     <div id={style.container}>
-
-      {/* Como pongo Nav en todas las paginas?? */}
-      <Nav />
-
       <div className={style.countryTools}>
         {/* SETTINGS  */}
         <div className={style.settings}>
           <div id={style.reload}>
             <label>Reload</label>
-            <img src={reloadIco} value="Reload" onClick={handleReloadDB} /> <br />
+            <img src={reloadIco} value="Reload" onClick={handleReloadDB} alt='reload' /> <br />
           </div>
           <div id={style.results}>
             <label>Page results <span>{countriesXPage}</span></label>
@@ -151,19 +159,18 @@ export default function Home() {
             <label>Sort</label>
             <div>
               <img src={sortAzIco} id="asc" name="order" value="ASC" onClick={handleOrder}
-                className={order === 'asc' ? style.imgSelected : null}
+                className={order === 'asc' ? style.imgSelected : null} alt='Order:ascending'
               />
               <img src={sortZaIco} id="des" name="order" value="DES" onClick={handleOrder}
-                className={order === 'des' ? style.imgSelected : null}
+                className={order === 'des' ? style.imgSelected : null} alt='Order:descending'
               />
               <img src={sortPersonUpIco} id="popUp" name="order" value="PopUp" onClick={handleOrder}
-                className={order === 'popUp' ? style.imgSelected : null}
+                className={order === 'popUp' ? style.imgSelected : null} alt='Order:popoulation up'
               />
               <img src={sortPersonDwIco} id="popDown" name="order" value="PopDown" onClick={handleOrder}
-                className={order === 'popDown' ? style.imgSelected : null}
+                className={order === 'popDown' ? style.imgSelected : null} alt='Order:popoulation down'
               />
             </div>
-
           </div>
 
           {/* SEARCH TEXT */}
@@ -202,12 +209,8 @@ export default function Home() {
               </select>
               <input type="button" onClick={handleClearFilters} value="X" className={style.button}
                 style={(filter.region || filter.activity) ? { visibility: 'visible' } : { visibility: 'hidden' }}
-
               />
             </div>
-
-
-
           </div>
 
         </div>
