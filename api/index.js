@@ -20,7 +20,7 @@
 const server = require('./src/app.js');
 const { conn } = require('./src/db.js');
 
-const DB_INIT = true;
+const DB_INIT = false;
 const PORT = process.env.PORT;
 
 // Syncing all the models at once.
