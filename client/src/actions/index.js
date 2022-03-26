@@ -2,7 +2,7 @@ import axios from 'axios';
 
 export function getCountries() {
     return async function (dispatch) {
-        const countries = await axios.get('http://localhost:3001/countries');
+        const countries = await axios.get('/countries'); // http://localhost:3001
         return dispatch({
             type: 'GET_COUNTRIES',
             payload: countries.data,
@@ -11,7 +11,7 @@ export function getCountries() {
 }
 export function getCountryDetails(id) {
     return async function (dispatch) {
-        const country = await axios.get('http://localhost:3001/countries/' + id);
+        const country = await axios.get('/countries/' + id);
         return dispatch({
             type: 'GET_COUNTRY_DETAIL',
             payload: country.data,
@@ -20,7 +20,7 @@ export function getCountryDetails(id) {
 }
 export function getActivitiesList() {
     return async function (dispatch) {
-        const activitiesList = await axios.get('http://localhost:3001/activities');
+        const activitiesList = await axios.get('/activities');
         return dispatch({
             type: 'GET_ACTIVITIES_LIST',
             payload: activitiesList.data,
