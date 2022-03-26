@@ -7,9 +7,9 @@ export default function Landing() {
 
   return (
     <div className={style.content}>
-
+      <div className={style.logo}>World Wide Countries</div>
       <Link to="/home">
-      <input type="button" value="Entrar" className={style.button} />
+      <input type="button" value="Enter" className={style.button} />
       </Link>
 
       <video autoPlay muted loop id={style.myVideo}>
